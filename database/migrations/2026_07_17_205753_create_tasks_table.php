@@ -9,20 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
-{
-    Schema::create('tasks', function (Blueprint $table) {
-        $table->id();
+    public function up(): void
+    {
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
 
-        $table->foreignId('project_id')
-            ->constrained()
-            ->cascadeOnDelete();
+            $table->foreignId('project_id')
+                ->constrained()
+                ->cascadeOnDelete();
 
-        $table->string('name');
-        $table->unsignedInteger('priority');
-        $table->timestamps();
-    });
-}
+            $table->string('name');
+            $table->unsignedInteger('priority');
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
