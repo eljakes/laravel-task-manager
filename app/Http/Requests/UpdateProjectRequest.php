@@ -2,14 +2,13 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpdateProjectRequest extends FormRequest
 {
     /**
-     * Allow visitors to submit the project edit form.
+     * Allow project updates because this assignment has no authentication.
      */
     public function authorize(): bool
     {
@@ -17,9 +16,9 @@ class UpdateProjectRequest extends FormRequest
     }
 
     /**
-     * Validation rules for updating a project.
+     * Validate data used to update a project.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -29,14 +28,15 @@ class UpdateProjectRequest extends FormRequest
                 'string',
                 'max:255',
 
-                // Ignore the current project so keeping its existing name is valid.
-                Rule::unique('projects', 'name')->ignore($this->route('project')),
+                // Allow the current project to keep its existing name.
+                Rule::unique('projects', 'name')
+                    ->ignore($this->route('project')),
             ],
         ];
     }
 
     /**
-     * Provide clearer validation feedback to the user.
+     * Return user-friendly validation messages.
      *
      * @return array<string, string>
      */

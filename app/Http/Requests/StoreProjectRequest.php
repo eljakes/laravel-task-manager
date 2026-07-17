@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProjectRequest extends FormRequest
 {
     /**
-     * Allow visitors to submit the project form.
+     * Allow project creation because this assignment has no authentication.
      */
     public function authorize(): bool
     {
@@ -16,19 +15,24 @@ class StoreProjectRequest extends FormRequest
     }
 
     /**
-     * Validation rules for creating a project.
+     * Validate data used to create a project.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:projects,name'],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:projects,name',
+            ],
         ];
     }
 
     /**
-     * Provide clearer validation feedback to the user.
+     * Return user-friendly validation messages.
      *
      * @return array<string, string>
      */

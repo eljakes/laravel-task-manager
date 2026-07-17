@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index(): View
     {
-        // Include the task count so the view does not need extra queries.
+        // Load each project's task count efficiently for display.
         $projects = Project::query()
             ->withCount('tasks')
             ->orderBy('name')
@@ -25,7 +25,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a project.
+     * Show the project creation form.
      */
     public function create(): View
     {
@@ -45,7 +45,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for editing a project.
+     * Show the project editing form.
      */
     public function edit(Project $project): View
     {
