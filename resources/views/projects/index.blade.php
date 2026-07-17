@@ -11,9 +11,15 @@
             </p>
         </div>
 
-        <a href="{{ route('projects.create') }}" class="btn btn-primary">
-            Add project
-        </a>
+        <div class="d-flex gap-2">
+            <a href="{{ route('tasks.index') }}" class="btn btn-outline-primary">
+                View tasks
+            </a>
+
+            <a href="{{ route('projects.create') }}" class="btn btn-primary">
+                Add project
+            </a>
+        </div>
     </div>
 
     @if ($projects->isEmpty())
@@ -49,6 +55,13 @@
                                 </td>
 
                                 <td class="text-end">
+                                    <a
+                                        href="{{ route('tasks.index', ['project' => $project->id]) }}"
+                                        class="btn btn-sm btn-outline-secondary"
+                                    >
+                                        Tasks
+                                    </a>
+
                                     <a
                                         href="{{ route('projects.edit', $project) }}"
                                         class="btn btn-sm btn-outline-primary"

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -8,12 +9,19 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| These routes handle all project-related pages.
-| Resource routes automatically create the standard CRUD endpoints.
+| These routes handle task and project management pages.
+| Resource routes create the standard CRUD endpoints.
 |
 */
 
-Route::resource('projects', ProjectController::class);
+Route::post('tasks/reorder', [TaskController::class, 'reorder'])
+    ->name('tasks.reorder');
 
-// Redirect the home page to the projects list.
-Route::redirect('/', '/projects');
+Route::resource('tasks', TaskController::class)
+    ->except('show');
+
+Route::resource('projects', ProjectController::class)
+    ->except('show');
+
+// Redirect the home page to the main task list.
+Route::redirect('/', '/tasks');
